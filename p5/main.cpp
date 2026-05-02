@@ -1,8 +1,6 @@
 #include <iostream>
 #include <cstdint>
 
-#include <numeric>
-
 uint32_t gcd(uint32_t a, uint32_t b)
 {
     if (a < b) { std::swap(a, b); }
