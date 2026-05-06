@@ -1,0 +1,140 @@
+#include <iostream>
+#include <cstdint>
+#include <vector>
+#include <chrono>
+
+class Solution
+{
+public:
+    Solution(uint32_t num_factors) : F(num_factors)
+    {
+        sieve_init();
+    }
+
+    void solve()
+    {
+        for (uint32_t p = 2; p <= SIZE; ++p)
+        {
+            if (sieve[p - 1])
+            {
+                primes.push_back(p);
+                for (uint32_t m = p*p; m <= SIZE; ++m)
+                {
+                    sieve[m - 1] = 0;
+                }
+            }
+        }
+        while (max_factors < F)
+        {
+            ++n_step;
+            uint32_t curr_factors = triangle_factorization();
+            max_factors = (curr_factors > max_factors) ? curr_factors : max_factors;
+        }
+
+        std::cout << n_step * (n_step + 1) / 2 << std::endl;
+    }
+
+private:
+    void sieve_again()
+    {
+        ++offset;
+        std::fill(sieve.begin(), sieve.end(), true);
+        uint32_t adj_offset = offset * SIZE;
+
+        for (const auto prime : primes)
+        {
+            uint32_t adj_pos = (adj_offset + prime - 1) / prime * prime;
+            while (adj_pos <= SIZE)
+            {
+                sieve[adj_pos - 1] = false;
+                adj_pos += prime;
+            }
+        }
+
+        for (uint32_t p = 0; p < SIZE; ++p)
+        {
+            uint32_t p_offset = (adj_offset) + p + 1;
+            if (sieve[p]) { primes.push_back(p_offset); }
+        }
+    }
+
+    void sieve_init()
+    {
+        sieve.resize(SIZE, true);
+        sieve[0] = false;
+
+        for (uint32_t p = 2; p <= SIZE; ++p)
+        {
+            if (sieve[p - 1])
+            {
+                primes.push_back(p);
+                for (uint32_t m = p * p; m <= SIZE; m += p)
+                {
+                    sieve[m - 1] = false;
+                }
+            }
+        }
+    }
+
+    uint32_t get_factors(uint32_t k)
+    {
+        uint32_t product = 1;
+        for (const auto prime : primes)
+        {
+            if (prime * prime > k) { break; }
+            if (k % prime == 0)
+            {
+                uint32_t count = 0;
+                while (k % prime == 0)
+                {
+                    k /= prime;
+                    ++count;
+                }
+                product *= (count + 1);
+            }
+        }
+        if (k > 1) { product *= 2; }
+        return product;
+    }
+
+    uint32_t triangle_factorization()
+    {
+        uint32_t cp1, cp2;
+        if (n_step % 2 == 0)
+        {
+            cp1 = n_step/2;
+            cp2 = n_step+1;
+        }
+        else
+        {
+            cp1 = n_step;
+            cp2 = (n_step+1)/2;
+        }
+
+        while (primes.back() < std::max(cp1, cp2))
+        {
+            sieve_again();
+        }
+    
+        return get_factors(cp1) * get_factors(cp2);
+    }
+
+    const uint32_t F, SIZE = 10000;
+    std::vector<bool> sieve;
+    std::vector<uint32_t> primes;
+    uint32_t max_factors = 0, n_step = 0, offset = 0;
+};
+
+
+int main()
+{
+    auto start = std::chrono::steady_clock::now();
+
+    Solution s(1000);
+    s.solve();
+
+    auto end = std::chrono::steady_clock::now();
+
+    auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    std::cout << diff.count() << " ms" << std::endl;
+}
