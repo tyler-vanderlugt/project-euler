@@ -1,29 +1,20 @@
 #include <iostream>
 #include <cstdint>
 #include <vector>
-#include <chrono>
+#include <string>
 
 class Solution
 {
 public:
-    Solution(uint32_t num_factors) : F(num_factors)
+    Solution() = delete;
+
+    Solution(const std::vector<std::string>& args) : F(static_cast<uint32_t>(std::stoul(args[0])))
     {
         sieve_init();
     }
 
     void solve()
     {
-        for (uint32_t p = 2; p <= SIZE; ++p)
-        {
-            if (sieve[p - 1])
-            {
-                primes.push_back(p);
-                for (uint32_t m = p*p; m <= SIZE; ++m)
-                {
-                    sieve[m - 1] = 0;
-                }
-            }
-        }
         while (max_factors < F)
         {
             ++n_step;
@@ -39,22 +30,23 @@ private:
     {
         ++offset;
         std::fill(sieve.begin(), sieve.end(), true);
-        uint32_t adj_offset = offset * SIZE;
+        uint32_t window_start = offset * SIZE;
+        uint32_t window_end = window_start + SIZE;
 
         for (const auto prime : primes)
         {
-            uint32_t adj_pos = (adj_offset + prime - 1) / prime * prime;
-            while (adj_pos <= SIZE)
+            uint32_t first_multiple = (window_start + prime - 1) / prime * prime;
+            if (first_multiple < window_start) { first_multiple += prime; }
+            
+            for (uint32_t m = first_multiple; m < window_end; m += prime)
             {
-                sieve[adj_pos - 1] = false;
-                adj_pos += prime;
+                sieve[m - window_start] = false;
             }
         }
 
         for (uint32_t p = 0; p < SIZE; ++p)
         {
-            uint32_t p_offset = (adj_offset) + p + 1;
-            if (sieve[p]) { primes.push_back(p_offset); }
+            if (sieve[p]) { primes.push_back(window_start + p); }
         }
     }
 
@@ -124,17 +116,3 @@ private:
     std::vector<uint32_t> primes;
     uint32_t max_factors = 0, n_step = 0, offset = 0;
 };
-
-
-int main()
-{
-    auto start = std::chrono::steady_clock::now();
-
-    Solution s(1000);
-    s.solve();
-
-    auto end = std::chrono::steady_clock::now();
-
-    auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << diff.count() << " ms" << std::endl;
-}
