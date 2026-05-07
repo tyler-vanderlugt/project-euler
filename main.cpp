@@ -7,16 +7,21 @@
 #include <string>
 #include <chrono>
 #include <iostream>
+#include <memory>
 
 int main(int argc, char** argv)
 {
     std::vector<std::string> args(argv + 1, argv + argc);
+    std::unique_ptr<Solution> s;
 
-    auto start = std::chrono::steady_clock::now();
+    if (args.empty()) {s = std::make_unique<Solution>(); }
+    else { s = std::make_unique<Solution>(args); }
 
-    Solution s(args);
     std::cout << "Output: ";
-    s.solve();
+    
+    auto start = std::chrono::steady_clock::now();
+    
+    s->solve();
 
     auto end = std::chrono::steady_clock::now();
     auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

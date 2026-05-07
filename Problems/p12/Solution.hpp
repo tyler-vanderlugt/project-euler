@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <cstdint>
 #include <vector>
@@ -6,15 +8,13 @@
 class Solution
 {
 public:
-    Solution() = delete;
-
-    Solution(const std::vector<std::string>& args) : F(static_cast<uint32_t>(std::stoul(args[0])))
-    {
-        sieve_init();
-    }
+    Solution() : F(500) {}
+    Solution(const std::vector<std::string>& args) :
+        F(static_cast<uint32_t>(std::stoul(args[0]))) {}
 
     void solve()
     {
+        sieve_init();
         while (max_factors < F)
         {
             ++n_step;
