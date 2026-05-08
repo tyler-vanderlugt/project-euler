@@ -123,6 +123,7 @@ int main(int argc, char** argv)
     {
         for (uint32_t i = 0; i <= problem_count; ++i)
         {
+            if (entries.contains(i)) { continue; }
             std::cout << "Working problem: " << i << '\n';
             if (!run_trials(entries, i)) { return -1; }
         }

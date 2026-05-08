@@ -7,7 +7,7 @@ args ?=
 run:
 	@if [ -z "$(p)" ]; then echo "Usage: make run p=n [args=\"...\"]"; exit 1; fi
 	@$(CXX) $(CXXFLAGS) -DSOLUTION_HEADER="\"Problems/p$(p)/Solution.hpp\"" main.cpp -o output
-	@./output "$(p)"
+	@./output $(args)
 	@rm output
 
 help:
@@ -18,6 +18,6 @@ help:
 
 averages:
 	@$(CXX) $(CXXFLAGS) get_averages.cpp -o get_averages
-	@./get_averages "$(p)"
+	@./get_averages $(p)
 	@rm get_averages
 	@echo "Averages stored in averages.csv"
