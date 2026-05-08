@@ -68,12 +68,6 @@ public:
 
             offset += ROOT_N;
         }
-        
-        // uint64_t sum = 0;
-        // for (const auto& p : primes)
-        // {
-        //     sum += p;
-        // }
 
         std::cout << sum << std::endl;
     }
