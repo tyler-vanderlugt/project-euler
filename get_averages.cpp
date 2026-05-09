@@ -123,7 +123,7 @@ int main(int argc, char** argv)
         }
     } else
     {
-        uint32_t problem_count = PROBLEM_COUNT;
+        uint32_t problem_count = PROBLEM_COUNT - 1;
         for (uint32_t i = 0; i <= problem_count; ++i)
         {
             if (entries.contains(i)) { continue; }

@@ -22,7 +22,7 @@ help:
 
 averages:
 	@$(CXX) $(CXXFLAGS) get_averages.cpp -o get_averages
-	@./get_averages $(p)
+	@-./get_averages $(p)
 	@rm get_averages
 	@echo "Averages stored in averages.csv"
 
