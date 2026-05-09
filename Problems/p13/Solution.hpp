@@ -3,9 +3,14 @@
 #include <iostream>
 #include <cstdint>
 #include <vector>
-#include <string>
 
-#include <algorithm>
+/*
+ * Calculates the first N digits of the sum of 100
+ * 50 digit numbers
+ * Performs manual addition down each column, carrying
+ * to the next and adding mod 10 to a string, then
+ * reading the string back to front for N digits
+*/
 
 class Solution
 {
@@ -28,7 +33,7 @@ public:
             col_sum /= 10;
         }
 
-        while (col_sum / 10 != 0)
+        while (col_sum / 10 > 0)
         {
             reversed_sum += (col_sum % 10 + '0');
             col_sum /= 10;

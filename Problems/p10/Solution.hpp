@@ -6,6 +6,11 @@
 #include <string>
 #include <cmath>
 
+/*
+ * Caculates the sum of all prime numbers below N
+ * Uses a segmented Sieve of Eratosthenes
+*/
+
 class Solution
 {
 public:

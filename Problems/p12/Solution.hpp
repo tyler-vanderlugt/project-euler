@@ -5,6 +5,15 @@
 #include <vector>
 #include <string>
 
+/*
+ * Finds the first triangle number with more than F divisors
+ * Uses the property that for T_n = n(n + 1) / 2, n and n + 1
+ * are coprimes and thus, gcd(n, n+1) = 1
+ * Breaks the numbers into two coprimes which are easier to
+ * factor
+ * Lazily generates primes with a segmented sieve as needed
+*/
+
 class Solution
 {
 public:
@@ -103,7 +112,7 @@ private:
             cp2 = (n_step+1)/2;
         }
 
-        while (primes.back() < std::max(cp1, cp2))
+        while (primes.back() <  cp2)
         {
             sieve_again();
         }

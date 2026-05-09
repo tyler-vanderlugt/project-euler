@@ -5,6 +5,14 @@
 #include <vector>
 #include <string>
 
+/*
+ * Finds the greatest product of L adjacent numbers in 
+ * the same direction (horizontal, vertical, diagonal)
+ * within a 20x20 grid
+ * Iterates through the grid in O(N^2) time, checking
+ * all orientations. 
+*/
+
 class Solution
 {
 public:
@@ -16,19 +24,25 @@ public:
     {
         uint32_t max_product = 0;
 
-        for (uint32_t dir1 = 0; dir1 <= N-L; ++dir1)
+        for (uint32_t row = 0; row <= N-L; ++row)
         {
-            const std::vector<uint32_t> ROW = GRID[dir1];
+            const std::vector<uint32_t> ROW = GRID[row];
             uint32_t row_product, col_product, ddo_product, dup_product;
 
-            for (uint32_t dir2 = 0; dir2 <= N-L; ++dir2)
+            for (uint32_t col = 0; col <= N-L; ++col)
             {
+                row_product = 1;
+                col_product = 1;
+                ddo_product = 1;
+                dup_product = 1;
 
-                row_product = ROW[dir2] * ROW[dir2+1] * ROW[dir2+2] * ROW[dir2+3];
-                col_product = GRID[dir2][dir1] * GRID[dir2+1][dir1] * GRID[dir2+2][dir1] * GRID[dir2+3][dir1];
-                ddo_product = GRID[dir1][dir2] * GRID[dir1+1][dir2+1] * GRID[dir1+2][dir2+2] * GRID[dir1+3][dir2+3];
-                dup_product = GRID[dir1+3][dir2] * GRID[dir1+2][dir2+1] * GRID[dir1+1][dir2+2] * GRID[dir1][dir2+3];
-
+                for (uint32_t i = 0; i < L; ++i)
+                {
+                    row_product *= ROW[col + i];
+                    col_product *= GRID[col + i][row];
+                    ddo_product *= GRID[row + i][col + i];
+                    dup_product *= GRID[row + L - 1 - i][col + i];
+                }
 
                 if (row_product > max_product) { max_product = row_product; }
                 if (col_product > max_product) { max_product = col_product; }
@@ -37,15 +51,22 @@ public:
             }
         }
 
-        for (uint32_t dir1 = N-L; dir1 < N; ++dir1)
+        for (uint32_t row = N-L; row < N; ++row)
         {
-            const std::vector<uint32_t> ROW = GRID[dir1];
+            const std::vector<uint32_t> ROW = GRID[row];
             uint32_t row_product, col_product;
 
-            for (uint32_t dir2 = 0; dir2 <= N-L; ++dir2)
+            for (uint32_t col = 0; col <= N-L; ++col)
             {
-                row_product = ROW[dir2] * ROW[dir2+1] * ROW[dir2+2] * ROW[dir2+3];
-                col_product = GRID[dir2][dir1] * GRID[dir2+1][dir1] * GRID[dir2+2][dir1] * GRID[dir2+3][dir1];
+                row_product = 1;
+                col_product = 1;
+
+                for (uint32_t i = 0; i < L; ++i)
+                {
+                    row_product *= ROW[col + i];
+                    col_product *= GRID[col + i][row];
+                }
+                
                 if (row_product > max_product) { max_product = row_product; }
                 if (col_product > max_product) { max_product = col_product; }
             }
