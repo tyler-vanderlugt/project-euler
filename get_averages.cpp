@@ -14,6 +14,9 @@
 #ifndef PROBLEM_COUNT
     #define PROBLEM_COUNT 0
 #endif
+#ifndef COMPILER_FLAGS
+    #define COMPILER_FLAGS ""
+#endif
 
 std::string run_command(const std::string& cmd)
 {
@@ -48,7 +51,7 @@ bool run_trials(std::map<uint32_t, uint32_t>& entries, const uint32_t n)
 {
     std::string pn = "p" + std::to_string(n);
     std::string header_path = "\"Problems/" + pn + "/Solution.hpp\"";
-    std::string compile_cmd = "g++ -std=c++20 -DSOLUTION_HEADER='" + header_path + "' main.cpp -o output";
+    std::string compile_cmd = "g++ " + std::string(COMPILER_FLAGS) + " -DSOLUTION_HEADER='" + header_path + "' main.cpp -o output";
     std::remove("./output");
     run_command(compile_cmd);
 
@@ -69,7 +72,7 @@ bool run_trials(std::map<uint32_t, uint32_t>& entries, const uint32_t n)
         }
     }
 
-    entries[n] = total_time / 5;
+    entries[n] = (total_time / 5);
     std::remove("./output");
     return true;
 }

@@ -4,7 +4,7 @@ args ?=
 
 CXX = g++
 
-CXXFLAGS = -std=c++20
+CXXFLAGS = -std=c++20 -O2
 override CXXFLAGS += -DPROBLEM_COUNT=$(PROBLEM_COUNT)
 
 .PHONY: run help averages new
@@ -21,7 +21,7 @@ help:
 	@echo " - help"
 
 averages:
-	@$(CXX) $(CXXFLAGS) get_averages.cpp -o get_averages
+	@$(CXX) $(CXXFLAGS) -DCOMPILER_FLAGS="\"$(CXXFLAGS)\"" get_averages.cpp -o get_averages
 	@-./get_averages $(p)
 	@rm get_averages
 	@echo "Averages stored in averages.csv"
