@@ -3,8 +3,6 @@
  * the average in averages.csv
 */
 
-#include "placeholder.hpp"
-
 #include <iostream>
 #include <cstdint>
 #include <cstdio>
@@ -12,6 +10,10 @@
 #include <charconv>
 #include <cstring>
 #include <system_error>
+
+#ifndef PROBLEM_COUNT
+    #define PROBLEM_COUNT 0
+#endif
 
 std::string run_command(const std::string& cmd)
 {
@@ -121,6 +123,7 @@ int main(int argc, char** argv)
         }
     } else
     {
+        uint32_t problem_count = PROBLEM_COUNT;
         for (uint32_t i = 0; i <= problem_count; ++i)
         {
             if (entries.contains(i)) { continue; }
