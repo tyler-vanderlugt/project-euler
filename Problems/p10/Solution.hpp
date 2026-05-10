@@ -25,7 +25,7 @@ public:
     {
         std::vector<bool> sieve(ROOT_N, true);
         sieve[0] = false;
-        std::vector<uint64_t> primes;
+        std::vector<uint64_t> base_primes;
         uint64_t sum = 0;
 
         for (uint64_t p = 2; p <= ROOT_N; ++p)
@@ -33,7 +33,7 @@ public:
             if (sieve[p-1])
             {
                 sum += p;
-                primes.push_back(p);
+                base_primes.push_back(p);
                 for (uint64_t m = p*p; m <= ROOT_N; m += p)
                 {
                     sieve[m-1] = false;
@@ -41,13 +41,14 @@ public:
             }
         }
         
+        std::vector<uint64_t> primes = base_primes;
         uint64_t offset = ROOT_N;
         while (offset < N)
         {
             uint64_t offset_ub = offset + ROOT_N;
             std::fill(sieve.begin(), sieve.end(), true);
 
-            for (const auto& p : primes)
+            for (const auto& p : base_primes)
             {
                 uint64_t r = offset % p;
                 uint64_t r_off = p - r;
