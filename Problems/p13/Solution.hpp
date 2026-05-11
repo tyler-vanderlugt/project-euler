@@ -5,7 +5,7 @@
 #include <vector>
 
 /*
- * Calculates the first N digits of the sum of 100
+ * Calculates the first 10 digits of the sum of 100
  * 50 digit numbers
  * Performs manual addition down each column, carrying
  * to the next and adding mod 10 to a string, then
@@ -153,5 +153,5 @@ private:
         "53503534226472524250874054075591789781264330331690"
     };
 
-    const uint32_t N;
+    const uint32_t N = 10;
 };

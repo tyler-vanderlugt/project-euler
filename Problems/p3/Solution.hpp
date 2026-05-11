@@ -6,7 +6,7 @@
 #include <string>
 
 /*
- * Finds the largest prime factor of a given n
+ * Finds the largest prime factor of a very large #
  * Iteratively divies n by 2 then every odd
  * number, effectively taking every prime factor
  * out of it until only the largest prime remains.
@@ -16,8 +16,6 @@ class Solution
 {
 public:
     Solution() {}
-    Solution(const std::vector<std::string>& args) :
-        n(static_cast<uint64_t>(std::stoul(args[0]))) {}
 
     void solve()
     {
@@ -40,5 +38,5 @@ public:
     }
 
 private:
-    uint64_t n = 600851475143;
+    uint64_t n = 600'851'475'143;
 };

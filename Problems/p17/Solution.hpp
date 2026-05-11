@@ -8,18 +8,15 @@
 
 /*
  * Finds the total amount of letters of each word
- * from 1 to N inclusive in word form
+ * from 1 to 1,000 inclusive in word form
  * Iterates over each number, breaking it up and 
- * adding based on it. Breaks at some point between
- * N = 1,000 and N = 500,000
+ * adding based on it.
 */
 
 class Solution
 {
 public:
-    Solution() : N(1000) {}
-    Solution(const std::vector<std::string>& args) :
-        N(static_cast<uint32_t>(std::stoul(args[0]))) {}
+    Solution() {}
 
     void solve()
     {
@@ -78,5 +75,5 @@ private:
         0, 8
     };
 
-    const uint32_t N;
+    const uint32_t N = 1'000;
 };

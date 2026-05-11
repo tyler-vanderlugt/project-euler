@@ -9,16 +9,17 @@ override CXXFLAGS += -DPROBLEM_COUNT=$(PROBLEM_COUNT)
 
 .PHONY: run help averages new
 run:
-	@if [ -z "$(p)" ]; then echo "Usage: make run p=n [args=\"...\"]"; exit 1; fi
+	@if [ -z "$(p)" ]; then echo "Usage: make run p=n"; exit 1; fi
 	@$(CXX) $(CXXFLAGS) -DSOLUTION_HEADER="\"Problems/p$(p)/Solution.hpp\"" main.cpp -o output
-	@./output $(args)
+	@-./output
 	@rm output
 
 help:
 	@echo "Commands: (make + command)"
-	@echo " - run p=n [args=\"x y z\"]"
-	@echo " - clean"
+	@echo " - run p=n"
 	@echo " - help"
+	@echo " - averages [p=n]"
+	@echo " - new"
 
 averages:
 	@$(CXX) $(CXXFLAGS) -DCOMPILER_FLAGS="\"$(CXXFLAGS)\"" get_averages.cpp -o get_averages
@@ -28,5 +29,5 @@ averages:
 
 new:
 	@$(CXX) $(CXXFLAGS)  make_new.cpp -o make_new
-	@./make_new
+	@-./make_new
 	@rm make_new

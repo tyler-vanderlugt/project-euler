@@ -6,7 +6,7 @@
 #include <string>
 
 /*
- * Finds starting term under N with longest collatz sequence
+ * Finds starting term under 1,000,000 with longest collatz sequence
  * Uses partial memorization to break out of sequences early
  * when running into previosly identified and saved values
  * (below N)
@@ -15,9 +15,7 @@
 class Solution
 {
 public:
-    Solution() : N(1000000) {}
-    Solution(const std::vector<std::string>& args) :
-        N(static_cast<uint32_t>(std::stoul(args[0]))) {}
+    Solution() {}
 
     void solve()
     {
@@ -50,6 +48,6 @@ private:
         return too_big_len;
     }
 
-    const uint32_t N;
+    const uint32_t N = 1'000'000;
     std::vector<uint32_t> terms;
 };

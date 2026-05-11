@@ -9,19 +9,14 @@
 #include <iostream>
 #include <memory>
 
-int main(int argc, char** argv)
+int main()
 {
-    std::vector<std::string> args(argv + 1, argv + argc);
-    std::unique_ptr<Solution> s;
-
-    if (args.empty()) {s = std::make_unique<Solution>(); }
-    else { s = std::make_unique<Solution>(args); }
-
+    Solution s;
     std::cout << "Output: ";
     
     auto start = std::chrono::steady_clock::now();
     
-    s->solve();
+    s.solve();
 
     auto end = std::chrono::steady_clock::now();
     auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

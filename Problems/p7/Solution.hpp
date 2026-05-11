@@ -7,7 +7,7 @@
 #include <cmath>
 
 /*
- * Finds the Nth primes number using the Sieve of Eratosthenes
+ * Finds the 10,001st primes number using the Sieve of Eratosthenes
  * Estimates an upper bound using the Prime Number Theorem, then
  * iteratively marks non-primes to isolate prime values until
  * reaching the Nth prime
@@ -16,12 +16,7 @@
 class Solution
 {
 public:
-    Solution() :
-        N(10001),
-        UPPER_BOUND(N * (std::log(N) + std::log(N)) - 0.5) {}
-    Solution(const std::vector<std::string>& args) :
-        N(static_cast<uint64_t>(std::stoul(args[0]))),
-        UPPER_BOUND(N * (std::log(N) + std::log(N)) - 0.5) {}
+    Solution() {}
 
     void solve()
     {
@@ -52,5 +47,5 @@ public:
     }
 
 private:
-    const uint64_t N, UPPER_BOUND;
+    const uint64_t N = 10'001, UPPER_BOUND = N * (std::log(N) + std::log(std::log(N)) - 0.5);
 };

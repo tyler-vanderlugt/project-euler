@@ -6,7 +6,7 @@
 #include <string>
 
 /*
- * Finds the greatest product of L adjacent numbers in 
+ * Finds the greatest product of 4 adjacent numbers in 
  * the same direction (horizontal, vertical, diagonal)
  * within a 20x20 grid
  * Iterates through the grid in O(N^2) time, checking
@@ -16,9 +16,7 @@
 class Solution
 {
 public:
-    Solution() : L(4) {}
-    Solution(const std::vector<std::string>& args) :
-        L(static_cast<uint32_t>(std::stoul(args[0]))) {}
+    Solution() {}
 
     void solve()
     {
@@ -99,5 +97,5 @@ private:
         {1,70,54,71,83,51,54,69,16,92,33,48,61,43,52,1,89,19,67,48}
     };
 
-    const uint8_t L, N = 20;
+    const uint8_t L = 4, N = 20;
 };

@@ -6,7 +6,7 @@
 #include <string>
 
 /*
- * Finds the first triangle number with more than F divisors
+ * Finds the first triangle number with more than 500 divisors
  * Uses the property that for T_n = n(n + 1) / 2, n and n + 1
  * are coprimes and thus, gcd(n, n+1) = 1
  * Breaks the numbers into two coprimes which are easier to
@@ -17,9 +17,7 @@
 class Solution
 {
 public:
-    Solution() : F(500) {}
-    Solution(const std::vector<std::string>& args) :
-        F(static_cast<uint32_t>(std::stoul(args[0]))) {}
+    Solution() {}
 
     void solve()
     {
@@ -120,7 +118,7 @@ private:
         return get_factors(cp1) * get_factors(cp2);
     }
 
-    const uint32_t F, SIZE = 10000;
+    const uint32_t F = 500, SIZE = 10000;
     std::vector<bool> sieve;
     std::vector<uint32_t> primes;
     uint32_t max_factors = 0, n_step = 0, offset = 0;

@@ -7,19 +7,14 @@
 #include <cmath>
 
 /*
- * Caculates the sum of all prime numbers below N
+ * Caculates the sum of all prime numbers below 2,000,000
  * Uses a segmented Sieve of Eratosthenes
 */
 
 class Solution
 {
 public:
-    Solution() :
-        N(2000000),
-        ROOT_N(std::sqrt(N) + 1) {}
-    Solution(const std::vector<std::string>& args) :
-        N(static_cast<uint32_t>(std::stoul(args[0]))),
-        ROOT_N(std::sqrt(N) + 1) {}
+    Solution() {}
 
     void solve()
     {
@@ -79,5 +74,5 @@ public:
     }
 
 private:
-    const uint32_t N, ROOT_N;
+    const uint32_t N = 2'000'000, ROOT_N = std::sqrt(N) + 1;
 };

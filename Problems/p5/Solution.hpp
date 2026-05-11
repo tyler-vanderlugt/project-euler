@@ -7,7 +7,7 @@
 
 /*
  * Calculates the smallest positive number that is evenly divisible
- * by all numbers 1 through N inclusive
+ * by all numbers 1 through 20 inclusive
  * Iteratively computes the least common multiple (lcm) of the 
  * current result and the next integer in the sequence using the
  * greatest common divisor (gcd)
@@ -16,9 +16,7 @@
 class Solution
 {
 public:
-    Solution() : N(20) {}
-    Solution(const std::vector<std::string>& args) :
-        N(static_cast<uint32_t>(std::stoul(args[0]))) {}
+    Solution() {}
 
     void solve()
     {
@@ -42,5 +40,5 @@ private:
         return gcd(a, b);
     }
 
-    const uint32_t N;
+    const uint32_t N = 20;
 };

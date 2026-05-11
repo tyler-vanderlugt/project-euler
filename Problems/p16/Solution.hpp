@@ -6,7 +6,7 @@
 #include <string>
 
 /*
- * Calculates the sum of digits of 2^N
+ * Calculates the sum of digits of 2^1000
  * Stores each number as parts of base 10^2 allowing 18
  * digits to be processed in each double/carry step, 
  * reducing the number of iterations compared to a base
@@ -16,9 +16,7 @@
 class Solution
 {
 public:
-    Solution() : N(1000) {}
-    Solution(const std::vector<std::string>& args) :
-        N(static_cast<uint32_t>(std::stoul(args[0]))) {}
+    Solution() {}
 
     void solve()
     {
@@ -49,6 +47,6 @@ public:
     }
 
 private:
-    const uint32_t N;
+    const uint32_t N = 1'000;
     const uint64_t BASE = 1'000'000'000'000'000'000;
 };

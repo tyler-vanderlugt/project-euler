@@ -6,16 +6,14 @@
 #include <string>
 
 /*
- * Sums the squares of odd integers up to N
+ * Sums the squares of odd integers up to 537,000
  * Uses brute force
 */
 
 class Solution
 {
 public:
-    Solution() : N(537000) {}
-    Solution(const std::vector<std::string>& args) :
-        N(static_cast<uint32_t>(std::stoul(args[0]))) {}
+    Solution() {}
 
     void solve()
     {
@@ -30,5 +28,5 @@ public:
     }
 
 private:
-    const uint32_t N;
+    const uint32_t N = 537'000;
 };

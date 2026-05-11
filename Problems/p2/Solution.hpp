@@ -7,7 +7,7 @@
 
 /*
  * Calculates the sum of even-valued Fibonnaci numbers
- * whose values do not exceed MAX_N
+ * whose values do not exceed 4,000,000
  * Uses brute force, checking each term and if even
  * adding to a running total 
 */
@@ -15,9 +15,7 @@
 class Solution
 {
 public:
-    Solution() : MAX_N(4000000) {}
-    Solution(const std::vector<std::string>& args) :
-        MAX_N(static_cast<uint32_t>(std::stoul(args[0]))) {}
+    Solution() {}
 
     void solve()
     {
@@ -38,5 +36,5 @@ public:
     }
 
 private:
-    const uint32_t MAX_N;
+    const uint32_t MAX_N = 4'000'000;
 };

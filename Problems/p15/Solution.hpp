@@ -6,9 +6,9 @@
 #include <string>
 
 /*
- * Calculates thenumber of lattice paths to reach the 
- * bottom right corner in a grid from the top left corner
- * only being able to go down or right
+ * Calculates the number of lattice paths to reach the 
+ * bottom right corner in a 20x20 grid from the top left
+ * corner only being able to go down or right
  * Uses pascals triangle to calculate the binomial 
  * expansion, in place to save memory and speed
 */
@@ -16,9 +16,7 @@
 class Solution
 {
 public:
-    Solution() : GRID_SIZE(20) {}
-    Solution(const std::vector<std::string>& args) :
-        GRID_SIZE(static_cast<uint64_t>(std::stoul(args[0]))) {}
+    Solution() {}
 
     void solve()
     {
@@ -37,5 +35,5 @@ public:
     }
 
 private:
-    const uint64_t GRID_SIZE;
+    const uint64_t GRID_SIZE = 20;
 };

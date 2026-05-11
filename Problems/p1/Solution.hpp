@@ -14,9 +14,7 @@
 class Solution
 {
 public:
-    Solution() : N(1000) {}
-    Solution(const std::vector<std::string>& args) :
-        N(static_cast<uint32_t>(std::stoul(args[0]))) {}
+    Solution() {}
 
     void solve()
     {
@@ -34,6 +32,6 @@ public:
     }
 
 private:
-    const uint32_t N;
+    const uint32_t N = 1000;
 
 };
