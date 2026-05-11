@@ -16,7 +16,7 @@
 class Solution
 {
 public:
-    Solution() : GRID_SIZE(20) {};
+    Solution() : GRID_SIZE(20) {}
     Solution(const std::vector<std::string>& args) :
         GRID_SIZE(static_cast<uint64_t>(std::stoul(args[0]))) {}
 

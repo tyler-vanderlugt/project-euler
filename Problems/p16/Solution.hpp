@@ -4,40 +4,51 @@
 #include <cstdint>
 #include <vector>
 #include <string>
-#include <algorithm>
+
+/*
+ * Calculates the sum of digits of 2^N
+ * Stores each number as parts of base 10^2 allowing 18
+ * digits to be processed in each double/carry step, 
+ * reducing the number of iterations compared to a base
+ * 10 approach
+*/
 
 class Solution
 {
 public:
-    Solution() : N(1000) {};
+    Solution() : N(1000) {}
     Solution(const std::vector<std::string>& args) :
         N(static_cast<uint32_t>(std::stoul(args[0]))) {}
 
     void solve()
     {
-        std::vector<char> cur_num = {1};
+        std::vector<uint64_t> digits = {1};
         for (uint32_t n = 1; n <= N; ++n)
         {
-            if (cur_num.back() != 0) { cur_num.push_back(0); }
-            char carry = 0;
-            for (uint32_t dig_idx = 0; dig_idx < cur_num.size() - 1; ++dig_idx)
+            if (digits.back() != 0) { digits.push_back(0); }
+            uint64_t carry = 0;
+            for (uint32_t dig_idx = 0; dig_idx < digits.size(); ++dig_idx)
             {
-                char doubled_digit = cur_num[dig_idx] * 2;
-                char r_dig = doubled_digit % 10;
-                cur_num[dig_idx] = r_dig + carry;
-                carry = doubled_digit / 10;
+                uint64_t dd = digits[dig_idx] * 2 + carry;
+                digits[dig_idx] = dd % BASE;
+                carry = dd / BASE;
             }
-            cur_num[cur_num.size() - 1] = carry;
+            if (carry) { digits.push_back(carry); }
         }
 
         uint32_t digit_sum = 0;
-        for (const auto digit : cur_num)
+        for (uint64_t digit : digits)
         {
-            digit_sum += digit;
+            while (digit != 0)
+            {
+                digit_sum += (digit % 10);
+                digit /= 10;
+            }
         }
         std::cout << digit_sum << std::endl;
     }
 
 private:
     const uint32_t N;
+    const uint64_t BASE = 1'000'000'000'000'000'000;
 };
