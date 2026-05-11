@@ -9,7 +9,6 @@ class Solution
 {
 public:
     Solution() {}
-    Solution(const std::vector<std::string>& args) {}
 
     void solve() {}
 
